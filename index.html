@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>何笑伊 Shirley He | Portfolio</title>
   <style>
     * {
@@ -115,6 +115,66 @@
       padding:2rem 5%;
       font-size:0.9rem;
     }
+    /* 作品两栏并列布局 */
+    .work-wrap{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap:2rem;
+    }
+    @media (max-width:768px){
+      .work-wrap{
+        grid-template-columns:1fr;
+      }
+    }
+
+    /* 带箭头轮播容器 */
+    .slider-wrap {
+      position: relative;
+      width:100%;
+      max-width:700px;
+      aspect-ratio:16 / 9;
+      border-radius:12px;
+      margin-bottom:2rem;
+      overflow:hidden;
+    }
+    .slider-wrap img {
+      position:absolute;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:12px;
+      top:0;
+      left:0;
+      opacity:0;
+      transition: opacity 0.7s ease;
+    }
+    .slider-wrap img.active {
+      opacity:1;
+    }
+    /* 左右箭头按钮 */
+    .slider-btn {
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:10;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      border:none;
+      background:rgba(0,0,0,0.45);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+    }
+    .slider-btn:hover {
+      background:rgba(0,0,0,0.7);
+    }
+    .btn-prev {
+      left:12px;
+    }
+    .btn-next {
+      right:12px;
+    }
   </style>
 </head>
 <body>
@@ -128,79 +188,73 @@
       <li><a href="#contact">联系方式</a></li>
     </ul>
   </nav>
-
   <!--首页 Home-->
   <section id="home" class="hero">
     <h1>何笑伊 Shirley He</h1>
     <div class="tag">影视摄影创作者｜AIGC短片创作者</div>
     <div class="slogan">Stay real, stay possible.</div>
-    <!--替换为你的首页主视觉图片，把div改成img标签-->
-    <img class="hero-cover" src="images/hero-cover.jpg" alt="首页主视觉">
+
+    <div class="slider-wrap" id="sliderWrap">
+      <button class="slider-btn btn-prev" id="btnPrev">‹</button>
+      <button class="slider-btn btn-next" id="btnNext">›</button>
+
+      <img class="active" src="images/cover2.jpg" alt="首页图1">
+      <img src="images/hero-cover.jpg" alt="首页图2">
+      <img src="images/cover4.jpg" alt="首页图3">
+    </div>
+
     <p style="max-width:650px;">云南艺术学院24级影视摄影与制作专业学生，热爱运动、绘画与摄影，专注AIGC实验影像创作，探索AI技术与影视叙事的融合边界。</p>
   </section>
 
   <!--作品合集 Works-->
   <section id="works">
     <h2>作品合集 Works</h2>
-
-    <div class="work-card">
-      <h3>《HAS IT CHANGE》｜AIGC真人风格短片</h3>
-      <p><strong>创作时间：</strong>2026年6月</p>
-      <p><strong>担任角色：</strong>执行导演｜AIGC生成｜剧本编辑｜美术设计</p>
-
-      <h4>项目背景/创作初衷</h4>
-      <p>本片构建一个信奉社会达尔文主义、暴力泛滥的反乌托邦世界。当世间所有暴力武器突然失效，人类却依旧无法挣脱固有的冲突思维。影片借此呼吁和平与发展，反思战争与人性。</p>
-
-      <h4>创作理念/核心表达</h4>
-      <p>灵感来源于《太空漫游2001》《人类之子》。探讨工具消失之后，人性是否会随之改变。技术可以销毁武器，但根植于人内心的偏见与对抗，才是冲突真正的源头。</p>
-
-      <h4>作品亮点/创作难点</h4>
-      <p>本片需要一套高度辨识度的美术体系，同时融合未来科技质感，叠加战争带来的破败、肃杀氛围，视觉统一难度高。作为第一部主导的短片作品，团队查阅大量影像资料，反复调试多种AI生成模型，深度理解当下AIGC影像工具的能力边界，完成从剧本构思到AI视觉落地完整链路。</p>
-
-      <p><strong>使用工具：</strong>Seedance2.0、SORA、Nanobanana、Gemini</p>
-      <p><strong>获奖参展：</strong>2026 釜山国际艺术节 AIGC短片单元 铜奖</p>
-      <img src="images/has-it-change-poster.jpg" alt="HAS IT CHANGE海报" style="width:100%;border-radius:8px;margin:1rem 0;">
-    </div>
-
-    <div class="work-card">
-      <h3>《竹侠》｜AIGC武侠短片</h3>
-      <p><strong>创作时间：</strong>2026年6月</p>
-      <p><strong>担任角色：</strong>AIGC生成、音乐制作</p>
-
-      <h4>项目背景/创作初衷</h4>
-      <p>将传统东方武侠叙事与AIGC影像技术结合，用AI演绎东方江湖意境，探索传统武侠美学在AI时代全新视觉表达，用新技术重新诠释侠义精神。</p>
-
-      <h4>创作理念/核心表达</h4>
-      <p>以竹为意象，竹代表坚韧、风骨与侠义。在虚实交织的AI江湖之中，探讨侠之大者的内核，跳出传统武侠套路，用现代影像视角重新解读东方侠义精神。</p>
-
-      <h4>作品亮点/创作难点</h4>
-      <p>难点在于AIGC还原传统武侠人物动作连贯性、东方水墨武侠氛围感，兼顾人物表演、武打镜头逻辑。同时独立完成全片音乐设计，音乐需要贴合江湖氛围感，与AI生成画面情绪做到匹配统一。在不断调试模型、调整提示词，平衡AI随机性与叙事可控性。</p>
-
-      <p><strong>使用工具：</strong>Seedance2.0、SORA、Gemini、PR、达芬奇</p>
-      <p><strong>获奖参展：</strong>麻园电影节 最佳AIGC奖；入围长春电影节AIGC短片单元</p>
-      <img src="images/zhu-xia-poster.jpg" alt="竹侠海报" style="width:100%;border-radius:8px;margin:1rem 0;">
+    <div class="work-wrap">
+      <div class="work-card">
+        <h3>《HAS IT CHANGE》｜AIGC真人风格短片</h3>
+        <p><strong>创作时间：</strong>2026年6月</p>
+        <p><strong>担任角色：</strong>执行导演｜AIGC生成｜剧本编辑｜美术设计</p>
+        <h4>项目背景/创作初衷</h4>
+        <p>本片构建一个信奉社会达尔文主义、暴力泛滥的反乌托邦世界。当世间所有暴力武器突然失效，人类却依旧无法挣脱固有的冲突思维。影片借此呼吁和平与发展，反思战争与人性。</p>
+        <h4>创作理念/核心表达</h4>
+        <p>灵感来源于《太空漫游2001》《人类之子》。探讨工具消失之后，人性是否会随之改变。技术可以销毁武器，但根植于人内心的偏见与对抗，才是冲突真正的源头。</p>
+        <h4>作品亮点/创作难点</h4>
+        <p>本片需要一套高度辨识度的美术体系，同时融合未来科技质感，叠加战争带来的破败、肃杀氛围，视觉统一难度高。作为第一部主导的短片作品，团队查阅大量影像资料，反复调试多种AI生成模型，深度理解当下AIGC影像工具的能力边界，完成从剧本构思到AI视觉落地完整链路。</p>
+        <p><strong>使用工具：</strong>Seedance2.0、SORA、Nanobanana、Gemini</p>
+        <p><strong>获奖参展：</strong>2026 釜山国际艺术节 AIGC短片单元 铜奖</p>
+        <img src="images/has-it-change-poster.jpg" alt="HAS IT CHANGE海报" style="width:100%;border-radius:8px;margin:1rem 0;">
+      </div>
+      <div class="work-card">
+        <h3>《竹侠》｜AIGC武侠短片</h3>
+        <p><strong>创作时间：</strong>2026年6月</p>
+        <p><strong>担任角色：</strong>AIGC生成、音乐制作</p>
+        <h4>项目背景/创作初衷</h4>
+        <p>将传统东方武侠叙事与AIGC影像技术结合，用AI演绎东方江湖意境，探索传统武侠美学在AI时代全新视觉表达，用新技术重新诠释侠义精神。</p>
+        <h4>创作理念/核心表达</h4>
+        <p>以竹为意象，竹代表坚韧、风骨与侠义。在虚实交织的AI江湖之中，探讨侠之大者的内核，跳出传统武侠套路，用现代影像视角重新解读东方侠义精神。</p>
+        <h4>作品亮点/创作难点</h4>
+        <p>难点在于AIGC还原传统武侠人物动作连贯性、东方水墨武侠氛围感，兼顾人物表演、武打镜头逻辑。同时独立完成全片音乐设计，音乐需要贴合江湖氛围感，与AI生成画面情绪做到匹配统一。在不断调试模型、调整提示词，平衡AI随机性与叙事可控性。</p>
+        <p><strong>使用工具：</strong>Seedance2.0、SORA、Gemini、PR、达芬奇</p>
+        <p><strong>获奖参展：</strong>麻园电影节 最佳AIGC奖；入围长春电影节AIGC短片单元</p>
+        <img src="images/zhu-xia-poster.jpg" alt="竹侠海报" style="width:100%;border-radius:8px;margin:1rem 0;">
+      </div>
     </div>
   </section>
-
   <!--关于我 About-->
   <section id="about">
     <h2>关于我 About</h2>
     <h3>基础简介</h3>
     <p>云南艺术学院 影视摄影与制作专业本科在读，拥有两年影像创作经历。主要创作方向为AIGC实验短片、纪录片摄影，横跨剧本编写、美术设计、AI影像生成、后期剪辑全流程。</p>
-
     <h3>创作理念 / 个人风格</h3>
     <p>热衷于意识流实验短片、音乐概念短片、现实向剧情片创作。喜欢将传统叙事与AIGC新技术结合，不局限单一媒介，尝试用影像探讨人性、社会、文化议题。既尊重经典影视语言，也愿意拥抱AI带来全新影像可能性。</p>
-
     <h3>专业技能</h3>
     <ul style="padding-left:1.5rem;margin:0.8rem 0;">
       <li>影像硬件：RED电影机、佳能系列单反摄像机，实景拍摄、灯光布光</li>
       <li>软件工具：PS、PR、达芬奇、AI、Procreate</li>
       <li>其他能力：剧本撰写、短片美术设计、AIGC影像提示词调试、短片配乐构思、分镜绘制</li>
     </ul>
-
     <h3>影响来源</h3>
     <p>昆汀·塔伦蒂诺、诺兰，受到他们叙事结构、镜头语言、主题表达的启发。</p>
-
     <h3>个人优势</h3>
     <ol style="padding-left:1.5rem;margin:0.8rem 0;">
       <li>善于观察、借鉴优秀影像作品，快速吸收转化为自己创作语言</li>
@@ -208,7 +262,6 @@
       <li>对新技术接受度高，敢于尝试多元艺术风格，乐于创新实验</li>
     </ol>
   </section>
-
   <!--个人简历 CV-->
   <section id="cv">
     <h2>个人简历 CV</h2>
@@ -233,7 +286,6 @@
         </tr>
       </tbody>
     </table>
-
     <h3>项目经历</h3>
     <table>
       <thead>
@@ -262,7 +314,6 @@
         </tr>
       </tbody>
     </table>
-
     <h3>获奖 / 参展荣誉</h3>
     <table>
       <thead>
@@ -295,7 +346,6 @@
       </tbody>
     </table>
   </section>
-
   <!--联系方式 Contact-->
   <section id="contact">
     <h2>联系方式 Contact</h2>
@@ -304,11 +354,48 @@
     <br>
     <p><strong>合作寄语：</strong>欢迎短片项目合作、影像作品交流、学术探讨、实习求职沟通。期待与各位创作者碰撞想法。</p>
   </section>
-
   <!--页脚 Footer-->
   <footer>
     <p>© Shirley He 何笑伊 All Rights Reserved.</p>
     <p>所有作品禁止私自盗用、商用、二次转载。网站更新时间：2026‑10‑13</p>
   </footer>
+
+<script>
+const wrap = document.getElementById('sliderWrap');
+const imgs = wrap.querySelectorAll('img');
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+let current = 0;
+const total = imgs.length;
+let timer;
+
+function show(index){
+  imgs.forEach((img,i)=>{
+    img.classList.toggle('active', i===index);
+  })
+}
+function next(){
+  current = (current +1) % total;
+  show(current);
+}
+function prev(){
+  current = (current -1 + total) % total;
+  show(current);
+}
+//自动轮播4秒
+function startAuto(){
+  timer = setInterval(next,4000);
+}
+function stopAuto(){
+  clearInterval(timer);
+}
+
+btnNext.addEventListener('click',()=>{ next(); stopAuto(); startAuto(); });
+btnPrev.addEventListener('click',()=>{ prev(); stopAuto(); startAuto(); });
+wrap.addEventListener('mouseenter', stopAuto);
+wrap.addEventListener('mouseleave', startAuto);
+
+startAuto();
+</script>
 </body>
 </html>
